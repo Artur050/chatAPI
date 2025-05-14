@@ -1,0 +1,8 @@
+node_modules/
+frontend/.next/
+frontend/.env
+backend/bin/
+backend/obj/
+backend/appsettings.Development.json
+.vscode/
+chatapi.sin
