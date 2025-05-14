@@ -8,6 +8,15 @@ if (string.IsNullOrEmpty(apiKey))
     throw new Exception("API ключ не найден. Проверь конфигурацию.");
 }
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(8080);
+    serverOptions.ListenAnyIP(443, listenOptions =>
+    {
+        listenOptions.UseHttps();
+    });
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
