@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import ChatInput from './ChatInput';
+import { MessageCircle } from 'lucide-react';
 
 export default function ChatPage() {
     const [message, setMessage] = useState('');
@@ -43,22 +44,27 @@ export default function ChatPage() {
     };
 
     return (
-        <main className="flex flex-col items-center min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 px-4 py-10">
-            <div className="w-full max-w-2xl bg-white p-6 rounded-2xl shadow-lg">
-                <h1 className="text-3xl font-bold mb-6 text-center text-blue-800">ChatGPT 2.0</h1>
-                <ChatInput
-                    message={message}
-                    onChange={setMessage}
-                    onSend={sendMessage}
-                    loading={loading}
-                />
-                {reply && (
-                    <div className="mt-6 p-4 bg-gray-100 rounded-xl text-gray-800 whitespace-pre-wrap">
-                        {reply}
-                    </div>
-                )}
-                {error && <div className="mt-4 text-red-500 text-sm">{error}</div>}
+        <main className="flex flex-col items-start min-h-screen bg-blue-950 px-4 py-10">
+            <div className="mb-4 text-white">
+                <MessageCircle size={32} />
             </div>
+            <h1 className="text-3xl font-bold mb-6 text-left text-white">Hi there!</h1>
+            <h2 className="text-4xl font-bold mb-4 text-white">What would you like to know?</h2>
+            <h3 className="text-2xl text-gray-400 mb-6">
+                Use one of the most common promp ts bellow <br /> or ask your own question
+            </h3>
+            <ChatInput
+                message={message}
+                onChange={setMessage}
+                onSend={sendMessage}
+                loading={loading}
+            />
+            {reply && (
+                <div className="mt-6 p-4 bg-gray-100 rounded-xl text-gray-800 whitespace-pre-wrap">
+                    {reply}
+                </div>
+            )}
+            {error && <div className="mt-4 text-red-500 text-sm">{error}</div>}
         </main>
     );
 }

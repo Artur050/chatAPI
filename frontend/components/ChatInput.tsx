@@ -1,7 +1,8 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { Mic, Loader2, Send } from 'lucide-react';
+import { Mic, Loader2, ChevronRight } from 'lucide-react';
+import TextareaAutosize from 'react-textarea-autosize';
 
 interface Props {
     message: string;
@@ -54,30 +55,34 @@ export default function ChatInput({ message, onChange, onSend, loading }: Props)
     };
 
     return (
-        <div className="w-full relative">
-            <textarea
+        <div className="w-full mt-auto">
+            <TextareaAutosize
                 value={message}
-                onChange={e => onChange(e.target.value)}
-                rows={4}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value)}
+                rows={1}
                 maxLength={1000}
-                className="w-full p-4 pr-20 border border-gray-300 rounded-2xl shadow-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="Введите сообщение..."
+                className="w-full p-4 pl-[50px] border border-gray-300 rounded-2xl shadow-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 text-white"
+                placeholder="Ask whatever you want"
             />
-            <div className="absolute bottom-3 right-4 flex gap-2 items-center">
+            <div className="absolute bottom-14 left-6">
                 <button
                     onClick={handleSpeech}
-                    className={`text-white p-2 rounded-full transition-colors duration-200 ${
-                        listening ? 'bg-red-500' : 'bg-blue-500'
-                    } hover:scale-110`}
+                    className="text-blue-400 hover:text-blue-600 transition-colors"
                 >
-                    <Mic size={20} />
+                    <Mic size={30} />
                 </button>
+            </div>
+            <div className="absolute bottom-12 right-4 flex items-center gap-2">
                 <button
                     onClick={onSend}
                     disabled={loading || !message.trim()}
-                    className="bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition-colors disabled:opacity-50"
+                    className="bg-blue-600 rounded-2xl text-white p-2 hover:bg-blue-800 transition-colors disabled:opacity-50"
                 >
-                    {loading ? <Loader2 className="animate-spin" size={20} /> : <Send size={20} />}
+                    {loading ? (
+                        <Loader2 className="animate-spin" size={40} />
+                    ) : (
+                        <ChevronRight size={40} />
+                    )}
                 </button>
             </div>
         </div>
