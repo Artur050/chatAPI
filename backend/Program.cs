@@ -11,10 +11,6 @@ if (string.IsNullOrEmpty(apiKey))
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
     serverOptions.ListenAnyIP(8080);
-    serverOptions.ListenAnyIP(443, listenOptions =>
-    {
-        listenOptions.UseHttps();
-    });
 });
 
 builder.Services.AddControllers();
