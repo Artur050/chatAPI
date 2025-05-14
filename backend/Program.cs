@@ -22,7 +22,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
         policy => policy
-            .WithOrigins("http://localhost:3000")
+            .WithOrigins("https://chat-api-tau-ten.vercel.app")
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
