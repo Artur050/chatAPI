@@ -55,28 +55,30 @@ export default function ChatInput({ message, onChange, onSend, loading }: Props)
     };
 
     return (
-        <div className="w-full mt-auto">
-            <TextareaAutosize
-                value={message}
-                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value)}
-                rows={1}
-                maxLength={1000}
-                className="w-full p-4 pl-[50px] border border-gray-300 rounded-2xl shadow-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 text-white"
-                placeholder="Ask whatever you want"
-            />
-            <div className="absolute bottom-14 left-6">
+        <div className="w-full mt-auto relative">
+            <div className="relative">
+                <TextareaAutosize
+                    value={message}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                        onChange(e.target.value)
+                    }
+                    rows={1}
+                    maxLength={1000}
+                    className="w-full p-4 pl-[50px] border border-gray-300 rounded-2xl shadow-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 text-white"
+                    placeholder="Ask whatever you want"
+                />
+
                 <button
                     onClick={handleSpeech}
-                    className="text-blue-400 hover:text-blue-600 transition-colors"
+                    className="absolute left-3 bottom-5 text-blue-400 hover:text-blue-600 transition-colors"
                 >
                     <Mic size={30} />
                 </button>
-            </div>
-            <div className="absolute bottom-12 right-4 flex items-center gap-2">
+
                 <button
                     onClick={onSend}
                     disabled={loading || !message.trim()}
-                    className="bg-blue-600 rounded-2xl text-white p-2 hover:bg-blue-800 transition-colors disabled:opacity-50"
+                    className="absolute right-0 bottom-2 bg-blue-600 rounded-2xl text-white p-2 hover:bg-blue-800 transition-colors disabled:opacity-50"
                 >
                     {loading ? (
                         <Loader2 className="animate-spin" size={40} />
